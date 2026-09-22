@@ -1,109 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quotes API Demo & Docs</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
-    .quote { margin: 10px 0; padding: 10px; border-left: 3px solid #333; }
-    input, button { margin: 5px 0; padding: 5px; }
-    pre { background: #f4f4f4; padding: 10px; overflow-x: auto; }
-    hr { margin: 20px 0; }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    .description {
+      color: #64748b;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .url {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0 15px;
+      border-radius: 5px;
+      background: #f1f5f9;
+      color: #0f172a;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      word-break: break-all;
+    }
+
+    input {
+      padding: 8px 10px;
+      margin-right: 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      width: 200px;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: 0;
+      border-radius: 5px;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .quote {
+      margin-top: 12px;
+      padding: 12px 15px;
+      border-left: 3px solid #2563eb;
+      background: #f8fafc;
+      border-radius: 0 5px 5px 0;
+    }
+
+    pre {
+      margin: 12px 0 0;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 5px;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 35px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
-  <h1>Quotes API Demo & Docs</h1>
 
-  <h2>1. Random Quote</h2>
-  <p>Full API URL: <code>https://quotes-api-991.vercel.app/api/quotes</code></p>
-  <button id="randomBtn">Ambil Random Quote</button>
-  <div id="randomQuote" class="quote"></div>
+<div class="container">
 
-  <h3>Contoh response:</h3>
-  <pre>
-{
+  <h1>Quotes API</h1>
+  <p class="description">REST API untuk mengakses kutipan (quotes) dan penulisnya.</p>
+
+  <div class="section">
+    <h2>1. Random Quote</h2>
+    <span class="url">GET https://quotes-api-991.vercel.app/api/quotes</span>
+
+    <button id="randomBtn">Ambil Random Quote</button>
+    <div id="randomQuote" class="quote" style="display:none"></div>
+
+    <pre>{
   "key": "pramoedya_ananta_toer",
   "quote": "Kemudian malam melanjutkan tugasnya: kosong dari segala perasaan.",
   "author": "Pramoedya Ananta Toer"
-}
-  </pre>
+}</pre>
+  </div>
 
-  <hr>
+  <div class="section">
+    <h2>2. Quote by Key</h2>
+    <span class="url">GET https://quotes-api-991.vercel.app/api/quotes?key=key_quote</span>
 
-  <h2>2. Quote by Key</h2>
-  <p>Full API URL: <code>https://quotes-api-991.vercel.app/api/quotes?key=key_quote</code></p>
-  <input type="text" id="keyInput" placeholder="Masukkan key_quote">
-  <button id="keyBtn">Cari Quote by Key</button>
-  <div id="keyResult"></div>
+    <div>
+      <input type="text" id="keyInput" placeholder="Masukkan key_quote">
+      <button id="keyBtn">Cari Quote</button>
+    </div>
+    <div id="keyResult"></div>
 
-  <h3>Contoh response:</h3>
-  <pre>
-[
+    <pre>[
   {
     "key": "pramoedya_ananta_toer",
     "quote": "Masa terbaik dalam hidup seseorang adalah masa ia dapat menggunakan kebebasan yang telah direbutnya sendiri.",
     "author": "Pramoedya Ananta Toer"
-  },
-  {
-    "key": "pramoedya_ananta_toer",
-    "quote": "Kesalahan orang-orang pandai ialah menganggap yang lain bodoh...",
-    "author": "Pramoedya Ananta Toer"
   }
-]
-  </pre>
+]</pre>
+  </div>
 
-  <hr>
+  <div class="section">
+    <h2>3. List Authors</h2>
+    <span class="url">GET https://quotes-api-991.vercel.app/api/quotes?listAuthors=true</span>
 
-  <h2>3. List Authors</h2>
-  <p>Full API URL: <code>https://quotes-api-991.vercel.app/api/quotes?listAuthors=true</code></p>
-  <button id="authorsBtn">Tampilkan List Author</button>
-  <div id="authorsResult"></div>
+    <button id="authorsBtn">Tampilkan List Author</button>
+    <div id="authorsResult"></div>
 
-  <h3>Contoh response:</h3>
-  <pre>
-{
+    <pre>{
   "pramoedya_ananta_toer": ["Pramoedya Ananta Toer"],
   "another_key": ["Author Name"]
-}
-  </pre>
+}</pre>
+  </div>
 
-  <script>
-    const API_URL = "https://quotes-api-991.vercel.app/api/quotes";
+  <footer>Quotes API</footer>
 
-    // Random quote
-    document.getElementById("randomBtn").onclick = async () => {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      document.getElementById("randomQuote").innerHTML = `<strong>${data.author}</strong>: ${data.quote}`;
-    };
+</div>
 
-    // Filter by key
-    document.getElementById("keyBtn").onclick = async () => {
-      const key = document.getElementById("keyInput").value.trim();
-      if (!key) return alert("Masukkan key_quote!");
-      const res = await fetch(`${API_URL}?key=${encodeURIComponent(key)}`);
-      if (!res.ok) {
-        document.getElementById("keyResult").innerHTML = "Quote tidak ditemukan!";
-        return;
-      }
-      const data = await res.json();
-      let html = "";
-      data.forEach(q => {
-        html += `<div class="quote"><strong>${q.author}</strong>: ${q.quote}</div>`;
-      });
-      document.getElementById("keyResult").innerHTML = html;
-    };
+<script>
+  const API_URL = "https://quotes-api-991.vercel.app/api/quotes";
 
-    // List authors
-    document.getElementById("authorsBtn").onclick = async () => {
-      const res = await fetch(`${API_URL}?listAuthors=true`);
-      const data = await res.json();
-      let html = "";
-      for (const key in data) {
-        html += `<div><strong>${key}</strong>: ${data[key].join(", ")}</div>`;
-      }
-      document.getElementById("authorsResult").innerHTML = html;
-    };
-  </script>
+  document.getElementById("randomBtn").onclick = async () => {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    const el = document.getElementById("randomQuote");
+    el.style.display = "block";
+    el.innerHTML = `<strong>${data.author}</strong>: ${data.quote}`;
+  };
+
+  document.getElementById("keyBtn").onclick = async () => {
+    const key = document.getElementById("keyInput").value.trim();
+    if (!key) return alert("Masukkan key_quote!");
+    const res = await fetch(`${API_URL}?key=${encodeURIComponent(key)}`);
+    if (!res.ok) {
+      document.getElementById("keyResult").innerHTML = "Quote tidak ditemukan!";
+      return;
+    }
+    const data = await res.json();
+    let html = "";
+    data.forEach(q => {
+      html += `<div class="quote"><strong>${q.author}</strong>: ${q.quote}</div>`;
+    });
+    document.getElementById("keyResult").innerHTML = html;
+  };
+
+  document.getElementById("authorsBtn").onclick = async () => {
+    const res = await fetch(`${API_URL}?listAuthors=true`);
+    const data = await res.json();
+    let html = "";
+    for (const key in data) {
+      html += `<div class="quote"><strong>${key}</strong>: ${data[key].join(", ")}</div>`;
+    }
+    document.getElementById("authorsResult").innerHTML = html;
+  };
+</script>
+
 </body>
 </html>
